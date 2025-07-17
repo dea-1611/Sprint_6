@@ -52,28 +52,13 @@ class OrderFormPage(BasePage):
     def check_the_title_of_second_form_displaying(self):
         self.check_element_displayed(TestLocatorsOrder.locator_form_title_rent)
 
-    @allure.step('Заполнение поля "Дата аренды"')
-    def set_rental_date(self, date_to_select):
-        try:
-            self.click_element(TestLocatorsOrder.locator_field_rental_date)
-            WebDriverWait(self.driver, 10).until(
-                EC.presence_of_element_located(TestLocatorsOrder.locator_calendar)
-            )
-            date_obj = datetime.strptime(date_to_select, '%d.%m.%Y')
-            formatted_date = date_obj.strftime('%d-е %B %Y г.')
-            day_of_week = date_obj.strftime('%A')  # Получаем день недели
-            date_xpath = (
-                f"//div[contains(@class, 'react-datepicker__day') "
-                f"and @aria-label='Choose {day_of_week}, {formatted_date}']"
-            )
-            date_element = WebDriverWait(self.driver, 10).until(
-                EC.element_to_be_clickable((By.XPATH, date_xpath))
-            )
-            date_element.click()
-        except TimeoutException as e:
-            print(f"Ошибка при выборе даты: {e}")
-            raise
-
+    @allure.step('Заполнить поле "Дата аренды"')
+    def set_rental_date(self):
+        self.click_element(TestLocatorsOrder.locator_field_rental_date)
+        self.find_element_with_wait(TestLocatorsOrder.locator_calendar)
+        today = self.find_element_with_wait(TestLocatorsOrder.locator_today)
+        tomorrow = today.find_element(*TestLocatorsOrder.locator_tomorrow)
+        tomorrow.click()
         return self
 
     @allure.step('Заполнение поля "Срок аренды"')
@@ -126,3 +111,15 @@ class OrderFormPage(BasePage):
         self.set_comment_field(comment)
         self.click_button_order()
         self.check_displaying_of_confirm_window()
+
+    def fill_personal_information(self, name, last_name, address, station, number):
+        pass
+
+    def fill_rental_information(self, comment):
+        pass
+
+    def confirm_order(self):
+        pass
+
+    def is_order_completed_popup_visible(self):
+        return self.driver.find_element(*TestLocatorsOrder.locator_pop_up_order_completed).is_displayed()
