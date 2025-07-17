@@ -27,9 +27,9 @@ class TestHomePageScooter:
 
     @allure.title('Клик на логотип "Яндекс"')
     @allure.description('Открытие страницы Яндекс.Дзен в новой вкладке при нажатии на логотип "Яндекс"')
-    def test_click_logo_yandex_opens_dzen_page(self, driver, home_page):
-        home_page.click_logo_yandex_open_dzen_page()
-        assert driver.current_url == dzen_url
+    def test_click_logo_yandex_opens_dzen_page(self, home_page):
+        home_page.click_element(home_page.logo_yandex_locator)
+        home_page.wait_url_to_be(dzen_url)
 
     @allure.title('Клик на логотип "Самокат"')
     @allure.description('Переход на главную страницу при клике на логотип "Самокат"')
