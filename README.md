@@ -17,23 +17,6 @@
 Клик по логотипу "Самокат" - переход на главную страницу
 Клик по логотипу "Яндекс" - открытие главной страницы Дзена в новой вкладке
 
-**Структура проекта**
-text
-├── conftest.py           # Фикстуры Pytest
-├── data.py               # Тестовые данные
-├── locators              # Локаторы элементов
-│   ├── locators_home_page.py
-│   └── locators_order.py
-├── page_objects          # Page Object Model
-│   ├── base_page.py
-│   ├── home_page.py
-│   └── order_page.py
-├── tests                 # Тестовые сценарии
-│   ├── test_home_page.py
-│   └── test_order_page.py
-├── requirements.txt      # Зависимости
-└── README.md             # Документация
-
 **Технологический стек**
 Python (версия 3.9+)
 Selenium - для автоматизации браузера
