@@ -32,24 +32,16 @@ class OrderFormPage(BasePage):
 
     @allure.step('Установка даты доставки: {date}')
     def set_rental_date(self, date):
-        # Клик и ввод даты
         date_field = self.find_element_with_wait(TestLocatorsOrder.locator_field_rental_date)
         date_field.click()
         date_field.clear()
         date_field.send_keys(date)
-
-        # Закрытие календаря кликом по другому элементу
         self.click_element(TestLocatorsOrder.locator_form_title_rent)
 
     @allure.step('Выбор срока аренды')
     def set_rental_duration(self):
-        # Прокрутка к элементу перед кликом
         self.scroll_to_element(TestLocatorsOrder.locator_field_rental_duration)
-
-        # Клик по полю выбора срока аренды (используем метод из BasePage)
         self.click_element(TestLocatorsOrder.locator_field_rental_duration)
-
-        # Выбор срока аренды (используем метод из BasePage)
         self.click_element(TestLocatorsOrder.locator_dropdown_rental_period)
 
     @allure.step('Выбор цвета самоката')
